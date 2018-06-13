@@ -80,3 +80,111 @@ function atira(x,y) {
 	document.body.appendChild(tiro);
 
 } 
+function controleTiros(){ 
+var tiros = document.getElementsByClassName("tiroJogador"); 
+var tam = tiros.length; 
+	for(var i=0; i<tam; i++){ 
+		if(tiros[i]){ 
+			var posicaoTiro = tiros[i].offsetTop; 
+			posicaoTiro -= velocidadeTiro; 
+			tiros[i].style.top = posicaoTiro + "px"; 
+			if(posicaoTiro<0){ tiros[i].remove(); 
+} 
+} }
+
+}
+
+function colisaoTiroBomba(tiro){ 
+var tam = bombasTotal.length; 
+	for(var i=0; i<tam; i++){ 
+		if(bombasTotal[i]){
+			if(((tiro.offsetTop <= (bombasTotal[i].offsetTop + 40)) && ((tiro.offsetTop + 6) >= (bombasTotal[i].offsetLeft))) && ((tiro.offsetLeft <= bombasTotal[i].offsetLeft + 24)) && ((tiro.offsetLeft + 6) >= (bombasTotal[i].offsetLeft))))
+			} 
+			criarExplosao (1, bombasTotal[i].offsetLeft-25, bombasTotal[i].offsetTop); bombasTotal[i].remove(); tiro.remove(); 
+} 
+} }
+
+function criarExplosao (tipo, x, y ){
+// 1=Ar, 2=Terra if(document.getElementById("explosao" + (indiceExplosao-10))){ 
+document.getElementById("explosao" + (indiceExplosao-10)).remove(); 
+} 
+var explosao = document.createElement("div");
+ var img = document.createElement("img");
+ var som = document.createElement("audio");
+ // Atributos para div var atributo1 = document.createAttribute("class");
+ var atributo2 = document.createAttribute("style");
+ var atributo3 = document.createAttribute("id");
+ //Atributo para Imagem var atributo4 = document.createAttribute("src");
+ //Atributos para Áudio var atributo5 = document.createAttribute("src");
+ var atributo6 = document.createAttribute("id");
+
+atributo3.value - "explosao" + indiceExplosao;
+if(tipo==1){
+   atributo1.value = "explosaoAr";
+   atributo2.value = "top:" + y + "px; left:" + x + "px;";
+   atributo4.value = "3iCN.gif?" + new Date();
+}
+else {
+   atributo1.value = "explosaoChao";
+   atributo2.value = "top:" + (tamanhoTelah-57) }+ "px; left:" + (x-17) + "px;";
+   atributo4.value = "Xy8CttI.gif?" + new Date();
+ }
+ atributo5.value = "explosao.mp3?" + new Date();
+ atributo6.value = "som" + indiceSom;
+ explosao.setAttributeNode(atributo1);
+ explosao.setAttributeNode(atributo2);
+ explosao.setAttributeNode(atributo3);
+ img.setAttributeNode(atributo4);
+ som.setAttributeNode(atributo5);
+ som.setAttributeNode(atributo6);
+ explosao.appendChild(img);
+ explosao.appendChild(som);
+ document.body.appendChild(explosao);
+ document.getElementById("som" + indiceSom).play();
+
+ indiceExplosao++;
+ indiceSom++;
+}
+
+function controlaJogador(){ posicaoJogadory += direcaoJogadory * velocidadeJogador; posicaoJogadorx += direcaoJogadorx * velocidadeJogador; jogador.style.top = posicaoJogadory + "px"; jogador.style.left = posicaoJogadorx + "px";
+
+}
+
+function gameLoop (){ if(jogo){ //Funções do Controle controlaJogador(); controleTiros(); controlaBomba();
+
+}
+frames = requestAnimationFrame(gameLoop);
+}
+
+function inicia(){ jogo = true;
+
+//Inicialização da Tela
+tamTelaw = window.innerHeight;
+tamTelah = window.innerWidth;
+
+//Inicialização do Jogador
+direcaoJogadorx = direcaoJogadory = 0;
+posicaoJogadorx = tamTelaw/2;
+posicaoJogadory = tamTelah/2;
+velocidadeJogador = velocidadeTiro = 6;
+jogador = document.getElementById("oie_81885poKsr1u6.gif");
+jogador.style.top = posicaoJogadory + "px";
+jogador.style.left = posicaoJogadorx + "px";
+
+//Controle das Bombas
+clearInterval(tempoBomba);
+contagemBombas = 150;
+velocidadeBomba = 3;
+tempoBomba = setInterval (criaBomba,1700);
+
+
+//Controle Planeta
+vidaPlaneta = 100;
+
+//Controles de Explosão
+indiceExplosao = indiceSom =  0;
+ 
+gameLoop ();
+}
+
+window.addEventListener ("load", inicia); document.addEventListener ("keydown", teclaDw); document.addEventListener ("keyup", teclaUp);

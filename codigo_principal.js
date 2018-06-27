@@ -187,4 +187,6 @@ indiceExplosao = indiceSom =  0;
 gameLoop ();
 }
 
-window.addEventListener ("load", inicia); document.addEventListener ("keydown", teclaDw); document.addEventListener ("keyup", teclaUp);
+window.addEventListener ("load", inicia); 
+document.addEventListener ("keydown", teclaDw); 
+document.addEventListener ("keyup", teclaUp);
